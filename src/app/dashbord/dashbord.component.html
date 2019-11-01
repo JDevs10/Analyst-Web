@@ -1,0 +1,182 @@
+<header>
+  <app-header></app-header>
+</header>
+
+<main id="main">
+
+  <!-- Main popup area -->
+  <div id="main-popup">
+    <!-- about popup -->
+    <div id="about-popup">
+      <h2>About Auto Savior</h2>
+      <br><br>
+      <p>Auto Savior protects passwords by encrypting using Crypto-js and storing them online in Firebase database.</p>
+      <button (click)="closeAboutPopup();">Cancel</button>
+    </div>
+
+    <!-- password generator -->
+    <div id="popup-password-generator">
+      <!-- <app-password-generator></app-password-generator> -->
+    </div>
+  </div>
+
+  <div id="row" class="row margin-row-0">
+    <!-- side bar -->
+    <aside id="side-bar">
+      <div class="col-12 col-md-12">
+        <nav class="navbar navbar-light">
+          <ul class="navbar-nav">
+            <li><a class="nav-link active">Accounts</a></li>
+            <li><a class="nav-link" (click)="openGeneratorPopup();">Graphs</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- footer -->
+      <footer>
+        <app-footer></app-footer>
+      </footer>
+    </aside>
+
+    <!-- content -->
+    <div id="content">
+        <nav id="innerNavbar" class="navbar navbar-expand-lg navbar-light bg-secondary">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <button class="btn btn-outline-light my-2 my-sm-0" (click)="openTheAccountPopUpNew()">Add New</button>
+              </li>
+            </ul>
+            <p id="alert-msg" class="m-auto my-lg-0"></p>
+            <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" name="searchInput" placeholder="Search ..." #searchInput="ngModel" [(ngModel)]="searchText">
+              <button class="btn btn-outline-light my-2 my-sm-0" type="submit" (click)="searchBox()">X</button>
+            </form>
+          </div>
+        </nav>
+
+      <div id="main-content" class="col-12 col-md-12">
+
+        <div id="pop-up">
+          <!-- new -->
+            <div id="popup-new-password">
+              <div class="header">
+                <div class="row margin-row-0">
+                  <div class="img">
+                    <img src="https://dummyimage.com/100.png/09f/fff" alt="">
+                  </div>
+                  <div>
+                    <h2 class="title">Add New Account</h2>
+                  </div>
+                </div>
+              </div>
+
+              <form [formGroup]="this.accountService.accountForm" >
+              <div class="body">
+                <input type="hidden" formControlName="$key">
+                <div class="form-group">
+                  <label for="">Name : </label>
+                  <input class="form-control" size="10" formControlName="Name" [ngClass]="{'is-invalid':submitted && formControls.Name.errors}">
+                  <div class="invalid-feeback text-danger" *ngIf="submitted && formControls.Name.errors">
+                    This field is required.
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="">Image : </label>
+                  <input class="form-control" size="10" formControlName="Image" [ngClass]="{'is-invalid':submitted && formControls.Image.errors}">
+                  <div class="invalid-feeback text-danger" *ngIf="submitted && formControls.Image.errors">
+                    This field is required.
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="">Start Amount : </label>
+                    <input class="form-control" size="10" formControlName="Value" [ngClass]="{'is-invalid':submitted && formControls.Value.errors}">
+                    <div class="invalid-feeback text-danger" *ngIf="submitted && formControls.Value.errors">
+                      This field is required.
+                    </div>
+                </div>
+                <div class="form-group">
+                  <label for="">Category : </label> &nbsp;
+                  <select class="form-group" formControlName="Category" [ngClass]="{'is-invalid':submitted && formControls.Category.errors}">
+                    <option value="">Please select</option>
+                    <option value="Main">Main</option>
+                    <option value="Savings">Savings</option>
+                    <option value="other">other</option>
+                  </select>
+                  <div class="invalid-feeback text-danger" *ngIf="submitted && formControls.Category.errors">
+                    This field is required.
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="">Currency : </label> &nbsp;
+                  <select class="form-group" formControlName="Currency" [ngClass]="{'is-invalid':submitted && formControls.Currency.errors}">
+                    <option value="">Please select</option>
+                    <option value="£">Pound</option>
+                    <option value="€">Euro</option>
+                    <option value="$">Dollar</option>
+                    <option value="C$">Canadian dollar</option>
+                    <option value="¥">Renminbi</option>
+                  </select>
+                  <div class="invalid-feeback text-danger" *ngIf="submitted && formControls.Currency.errors">
+                    This field is required.
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="">Color : </label> &nbsp;
+                  <select class="form-group" formControlName="Color" [ngClass]="{'is-invalid':submitted && formControls.Color.errors}">
+                    <option value="">Please select</option>
+                    <option value="#0000ff">Blue</option>
+                    <option value="#ff0000">Red</option>
+                    <option value="#00ff00">Green</option>
+                    <option value="#000000">Black</option>
+                    <option value="#ffffff">White</option>
+                  </select>
+                  <div class="invalid-feeback text-danger" *ngIf="submitted && formControls.Color.errors">
+                    This field is required.
+                  </div>
+                </div>
+              </div>
+
+              <hr>
+
+              <div class="footer">
+                <div class="row margin-row-0">
+                  <div class="btn">
+                    <button (click)="addNewAccountSubmit();" type="submit" class="btn btn-primary"><i class="far fa-save"></i></button>
+                    <button (click)="closeTheAccountPopUpNew();">Cancel</button>
+                  </div>
+                </div>
+              </div>
+
+              </form>
+            </div>
+        </div>
+
+        <!-- display the account list -->
+        <div class="row">
+
+          <div *ngFor="let account of accountArray">
+            <div *ngIf="filterCondition(account)">
+              <div class="col-lg-10 col-md-4 col-sm-6" (click)="viewTheAccount(account)"> <!-- col-lg-2 col-md-4 col-sm-6 -->
+                <div class="card mb-2 shadow-sm card-box" [ngStyle]="{'background-color': this.encrDecrService.decrypt(account.Color)}">
+                  <img class="img-box-size" src="{{this.encrDecrService.decrypt(account.Image)}}" alt="Account Image">
+                  <div class="card-body">
+                    <h2>{{this.encrDecrService.decrypt(account.Currency)}}{{this.encrDecrService.decrypt(account.Value)}}</h2>
+                    <br>
+                    <label>{{this.encrDecrService.decrypt(account.Name)}}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

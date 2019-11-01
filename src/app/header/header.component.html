@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/home">Analyst</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedHeader" aria-controls="navbarSupportedHeader" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedHeader">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a id="Sync" class="nav-link active">Sync</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Tools
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item">Export</a>
+          <a class="dropdown-item">Import</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="openAboutPopup();">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="this.authenticationService.doLogout();">Log out</a>
+      </li>
+    </ul>
+  </div>
+</nav>
