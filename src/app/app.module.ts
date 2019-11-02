@@ -18,6 +18,12 @@ import { EncrDecrService } from './service/encr-decr.service';
 import { AuthenticationService } from './service/authentication.service';
 import { AuthGuard } from './auth.guard';
 import { HeaderComponent } from './header/header.component';
+import { AccountListComponent } from './account-list/account-list.component';
+import { AccountGraphListComponent } from './account-graph-List/account-graph-List.component';
+import { ChartsModule } from 'ng2-charts';
+import { AccountOperationListComponent } from './account-operation-list/account-operation-list.component';
+import { AccountComponent } from './account/account.component';
+import { AccountNewOperationComponent } from './account-new-operation/account-new-operation.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +31,12 @@ import { HeaderComponent } from './header/header.component';
     DashbordComponent,
     FooterComponent,
     UserLoginComponent,
-    HeaderComponent
+    HeaderComponent,
+    AccountListComponent,
+    AccountGraphListComponent,
+    AccountOperationListComponent,
+    AccountComponent,
+    AccountNewOperationComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +44,8 @@ import { HeaderComponent } from './header/header.component';
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
-    FormsModule
+    FormsModule,
+    ChartsModule
   ],
   providers: [
     AccountServiceService,

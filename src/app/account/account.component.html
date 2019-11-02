@@ -22,8 +22,9 @@
       <div class="col-12 col-md-12">
         <nav class="navbar navbar-light">
           <ul class="navbar-nav">
-            <li><a class="nav-link active" (click)="showAccountList()">Accounts</a></li>
-            <!-- <li><a class="nav-link" (click)="showAccountGraphList()">Graphs</a></li> -->
+            <li><a class="nav-link active" (click)="showAccountOperationList(currentAccount)">My Operations</a></li>
+            <li><a class="nav-link" (click)="showAccountNewOperation(currentAccount)">New Operation</a></li>
+            <li><a class="nav-link" (click)="showAccountGraphOperationList(currentAccount)">My Graphs</a></li>
           </ul>
         </nav>
       </div>

@@ -3,18 +3,9 @@
     margin: 0;
 }
 
-img.img-box-size{
-    height: 50px;
-    width: 50px;
-}
-
-.card-box{
-    width: 120px;
-}
-
 div#row{
     display: fixed;
-    /*height: 91.5vh;*/
+    /* height: 91.5vh;*/
     height: 100%;
     height: 91.5vh;
     background-color: transparent;
@@ -46,19 +37,6 @@ div#content{
     width: 85%;
 }
 
-div#content div#main-content{
-    display: fixed;
-    height: 80vh;
-    position: relative;
-    overflow-y: scroll;
-}
-
-div#content nav#innerNavbar{
-    margin-bottom: 20px;
-    position: relative;
-    top: 0;
-}
-
 /* Main popup */
 #main-popup{
     display: none;
@@ -69,6 +47,7 @@ div#content nav#innerNavbar{
     top: 5%;
 }
 
+/* About popup */
 #about-popup{
     display: none;
     height: auto;
@@ -95,143 +74,6 @@ div#content nav#innerNavbar{
 #about-popup button:hover{
     color: white;
     background-color: #000;
-    border-radius: 5px;
-}
-
-/* popup */
-#pop-up{
-    display: none;
-    background-color: gray;
-    color: #fff;
-    height: auto;
-    width: auto;
-    z-index: 100;
-    position: absolute;
-    right: 0;
-    top: 0;
-}
-
-/* password view */
-#popup-view-password{
-    display: none;
-}
-
-#popup-view-password div.header{
-    padding: 20px;
-    background-color: blue;
-}
-
-#popup-view-password div.header div.row div{
-    padding-right: 30px;
-}
-
-#popup-view-password div.header h2.title{
-    margin-right: 100px;
-}
-
-#popup-view-password div.body{
-    margin-top: 5%;
-    margin-left: 20%;
-    margin-bottom: 10%;
-}
-
-#popup-view-password div.footer button{
-    margin-left: 60px;
-    font-size: 18px;
-    background-color: transparent;
-    border-color: transparent;
-    color: #fff;
-}
-
-#popup-view-password div.footer button:hover{
-    background-color: #000;
-    border-radius: 15px;
-    color: skyblue;
-}
-
-/* password edit */
-#popup-edit-password{
-    display: none;
-}
-
-#popup-edit-password div.header{
-    padding: 20px;
-    background-color: blue;
-}
-
-#popup-edit-password div.header div.row div{
-    padding-right: 30px;
-}
-
-#popup-edit-password div.header h2.title{
-    margin-right: 100px;
-}
-
-#popup-edit-password div.body{
-    margin-top: 5%;
-    margin-left: 20%;
-    margin-bottom: 10%;
-}
-
-#popup-edit-password div.footer button{
-    margin-left: 60px;
-    font-size: 18px;
-    background-color: transparent;
-    border-color: transparent;
-    color: #fff;
-}
-
-#popup-edit-password div.footer button:hover{
-    background-color: #000;
-    border-radius: 15px;
-    color: skyblue;
-}
-
-/* password new */
-#popup-new-password{
-    display: none;
-}
-
-#popup-new-password div.header{
-    padding: 20px;
-    background-color: blue;
-}
-
-#popup-new-password div.header div.row div{
-    padding-right: 30px;
-}
-
-#popup-new-password div.header h2.title{
-    margin-right: 100px;
-}
-
-#popup-new-password div.body{
-    margin-top: 5%;
-    margin-left: 20%;
-    margin-bottom: 10%;
-}
-
-#popup-new-password div.footer button{
-    margin-left: 60px;
-    font-size: 18px;
-    background-color: transparent;
-    border-color: transparent;
-    color: #fff;
-}
-
-#popup-new-password div.footer button:hover{
-    background-color: #000;
-    border-radius: 15px;
-    color: skyblue;
-}
-
-/* password generator */
-#popup-password-generator{
-    display: none;
-    height: auto;
-    width: 500px;
-    padding: 20px;
-    background-color: skyblue;
     border-radius: 5px;
 }
 

@@ -1,0 +1,110 @@
+
+.margin-row-0{
+  margin: 0;
+}
+
+nav#innerNavbar{
+  background-color: #0B5ECD;
+}
+
+img.img-box-size{
+  height: 60px;
+  width: 60px;
+}
+
+.account-icon{
+  display: inline-block;
+  position: absolute;
+  height: 60px;
+  width: 60px;
+  font-size: 150px;
+  color: rgba(207, 207, 207, 0.808);
+  top: 1px;
+  right: 15px;
+  z-index: 50;
+}
+
+.card-box{
+  width: 300px;
+  overflow: hidden;
+}
+
+div#content_account{
+  width: 100%;
+}
+
+div#content_account nav#innerNavbar{
+  margin-bottom: 10px;
+  position: relative;
+  top: 0;
+}
+
+div#content_account div#main-content{
+  display: fixed;
+  position: relative;
+  overflow-y: scroll;
+}
+
+/* popup */
+#pop-up{
+  display: none;
+  background-color: #000000;
+  color: #ffffff;
+  height: auto;
+  width: auto;
+  z-index: 100;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+/* account new */
+#popup-new-account{
+  display: none;
+}
+
+#popup-new-account div.header{
+  padding: 20px;
+  background-color: #0B5ECD;
+}
+
+#popup-new-account div.header div.row div{
+  padding-right: 30px;
+}
+
+#popup-new-account div.header h2.title{
+  margin-right: 100px;
+}
+
+#popup-new-account div.body{
+  margin-top: 5%;
+  margin-left: 20%;
+  margin-right: 10%;
+  margin-bottom: 10%;
+}
+
+#popup-new-account div.footer button{
+  margin-left: 60px;
+  font-size: 18px;
+  background-color: transparent;
+  border-color: transparent;
+  color: #fff;
+}
+
+#popup-new-account div.footer button:hover{
+  background-color: #000;
+  border-radius: 15px;
+  color: skyblue;
+}
+
+/* Responsive */
+@media only screen and (max-width: 768px) {
+  aside {
+    width: 100%;
+    height: 200px;
+  }
+
+  div#content{
+      width: 100%;
+  }
+}

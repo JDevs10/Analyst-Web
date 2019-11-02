@@ -1,0 +1,146 @@
+<!-- content_account -->
+<div id="content_account">
+
+    <nav id="innerNavbar" class="navbar navbar-expand-lg navbar-light">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <button class="btn btn-outline-light my-2 my-sm-0" (click)="openTheAccountPopUpNew()">Add New</button>
+          </li>
+        </ul>
+        <p id="alert-msg" class="m-auto my-lg-0"></p>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" name="searchInput" placeholder="Search ..." #searchInput="ngModel" [(ngModel)]="searchText">
+          <button class="btn btn-outline-light my-2 my-sm-0" type="submit" (click)="searchBox()">X</button>
+        </form>
+      </div>
+    </nav>
+
+    <div id="main-content" class="col-12 col-md-12">
+
+      <div id="pop-up">
+          <div id="popup-new-account">
+            <div class="header">
+              <div class="row margin-row-0">
+                <div class="img">
+                  <img src="https://dummyimage.com/100.png/09f/fff" alt="">
+                </div>
+                <div>
+                  <h2 class="title">Add New Account</h2>
+                </div>
+              </div>
+            </div>
+
+            <form [formGroup]="this.accountService.accountForm" >
+            <div class="body">
+              <input type="hidden" formControlName="$key">
+              <div class="form-group">
+                <label for="">Name : </label>
+                <input class="form-control" size="10" formControlName="Name" [ngClass]="{'is-invalid':submitted && formControls.Name.errors}">
+                <div class="invalid-feeback text-danger" *ngIf="submitted && formControls.Name.errors">
+                  This field is required.
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="">Start Amount : </label>
+                  <input class="form-control" size="10" formControlName="Value" [ngClass]="{'is-invalid':submitted && formControls.Value.errors}">
+                  <div class="invalid-feeback text-danger" *ngIf="submitted && formControls.Value.errors">
+                    This field is required.
+                  </div>
+              </div>
+              <div class="form-group">
+                <label for="">Category : </label> &nbsp;
+                <select class="form-group" formControlName="Category" [ngClass]="{'is-invalid':submitted && formControls.Category.errors}">
+                  <option value="">Please select</option>
+                  <option value="Main">Main</option>
+                  <option value="Savings">Savings</option>
+                  <option value="other">other</option>
+                </select>
+                <div class="invalid-feeback text-danger" *ngIf="submitted && formControls.Category.errors">
+                  This field is required.
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="">Currency : </label> &nbsp;
+                <select class="form-group" formControlName="Currency" [ngClass]="{'is-invalid':submitted && formControls.Currency.errors}">
+                  <option value="">Please select</option>
+                  <option value="£">Pound</option>
+                  <option value="€">Euro</option>
+                  <option value="$">Dollar</option>
+                  <option value="C$">Canadian dollar</option>
+                  <option value="¥">Renminbi</option>
+                </select>
+                <div class="invalid-feeback text-danger" *ngIf="submitted && formControls.Currency.errors">
+                  This field is required.
+                </div>
+              </div>
+              <!-- <div class="form-group">
+                <label for="">Image : </label>
+                <input class="form-control" size="10" formControlName="Image" [ngClass]="{'is-invalid':submitted && formControls.Image.errors}">
+                <div class="invalid-feeback text-danger" *ngIf="submitted && formControls.Image.errors">
+                  This field is required.
+                </div>
+              </div> -->
+              <div class="form-group">
+                <label for="">Color : </label> &nbsp;
+                <select class="form-group" formControlName="Color" [ngClass]="{'is-invalid':submitted && formControls.Color.errors}">
+                  <option value="">Please select</option>
+                  <option value="#43C9E8">Blue</option>
+                  <option value="#FF2B31">Red</option>
+                  <option value="#4CFF45">Green</option>
+                  <option value="#FFFF52">Yellow</option>
+                  <option value="#F28C0F">Orange</option>
+                  <option value="#ffffff">White</option>
+                </select>
+                <div class="invalid-feeback text-danger" *ngIf="submitted && formControls.Color.errors">
+                  This field is required.
+                </div>
+              </div>
+            </div>
+
+            <hr>
+
+            <div class="footer">
+              <div class="row margin-row-0">
+                <div class="btn">
+                  <button (click)="addNewAccountSubmit();" type="submit" class="btn btn-primary"><i class="far fa-save"></i></button>
+                  <button (click)="closeTheAccountPopUpNew();">Cancel</button>
+                </div>
+              </div>
+            </div>
+
+            </form>
+          </div>
+      </div>
+
+      <!-- display the account list -->
+      <br>
+      <div class="row">
+
+        <div *ngFor="let account of accountArray">
+          <div *ngIf="filterCondition(account)">
+            <div class="col-lg-10 col-md-4 col-sm-6" (click)="viewTheAccount(account)">
+            <div class="card mb-2 shadow-sm card-box" [ngStyle]="{'background-color': this.encrDecrService.decrypt(account.Color), 'overflow': hidden}">
+              <div class="card-body">
+                <h2>{{this.encrDecrService.decrypt(account.Currency)}} {{this.encrDecrService.decrypt(account.Value)}}</h2>
+                <h5>{{this.encrDecrService.decrypt(account.Name)}}</h5>
+                <p>{{this.encrDecrService.decrypt(account.Category)}}</p>
+                <div class="account-icon">
+                  <i class="fas {{this.encrDecrService.decrypt(account.Image)}}"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+</div>
+

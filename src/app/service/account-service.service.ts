@@ -15,7 +15,7 @@ export class AccountServiceService {
   accountForm = new FormGroup({
     $key: new FormControl(null),
     Name: new FormControl('', Validators.required),
-    Image: new FormControl('', Validators.required),
+    Image: new FormControl(''),
     Value: new FormControl('', Validators.required),
     Category: new FormControl('', Validators.required),
     Currency: new FormControl('', Validators.required),
