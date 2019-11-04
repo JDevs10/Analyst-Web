@@ -1,3 +1,70 @@
-<p>
-  account-new-operation works!
-</p>
+<div id="new-account-operation">
+  <div id="new-account-operation-layout">
+    <div class="header">
+      <div class="row margin-row-0">
+        <div>
+          <h2 class="title">Add New Operation</h2>
+        </div>
+      </div>
+    </div>
+
+    <form [formGroup]="this.operationService.operationForm" >
+    <div class="body">
+      <input type="hidden" formControlName="$key">
+      <div class="form-group">
+        <label for="">Name : </label>
+        <input class="form-control" size="10" formControlName="Name" [ngClass]="{'is-invalid':submitted && formControls.Name.errors}">
+        <div class="invalid-feeback text-danger" *ngIf="submitted && formControls.Name.errors">
+          This field is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="">Value : </label>
+          <input class="form-control" size="10" formControlName="Value" [ngClass]="{'is-invalid':submitted && formControls.Value.errors}">
+          <div class="invalid-feeback text-danger" *ngIf="submitted && formControls.Value.errors">
+            This field is required.
+          </div>
+      </div>
+      <div class="form-group">
+        <label for="">Category : </label> &nbsp;
+        <select class="form-group" formControlName="Category" [ngClass]="{'is-invalid':submitted && formControls.Category.errors}">
+          <option value="">Please select</option>
+          <option value="Job">Job</option>
+          <option value="Food">Food</option>
+          <option value="Games">Games</option>
+          <option value="Movies">Movies</option>
+          <option value="Shopping">Shopping</option>
+          <option value="Project">Project</option>
+          <option value="Other">other</option>
+        </select>
+        <div class="invalid-feeback text-danger" *ngIf="submitted && formControls.Category.errors">
+          This field is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="">Transaction Type : </label> &nbsp;
+        <select class="form-group" formControlName="Type" [ngClass]="{'is-invalid':submitted && formControls.Type.errors}">
+          <option value="">Please select</option>
+          <option value="earnings">Earnings</option>
+          <option value="expenses">Expenses</option>
+        </select>
+        <div class="invalid-feeback text-danger" *ngIf="submitted && formControls.Type.errors">
+          This field is required.
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="footer">
+      <div class="row margin-row-0">
+        <div class="btn">
+          <button (click)="addNewOperationSubmit();" type="submit" class="btn btn-primary mr-3"><i class="far fa-save"></i></button>
+          <button (click)="cancelNewOperationSubmit();" type="submit" class="btn btn-primary">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    </form>
+  </div>
+</div>

@@ -25,7 +25,7 @@ export class AuthenticationService {
     password: new FormControl('', Validators.required)
   });
 
-  loggedIn(){
+  loggedIn() {
     // if the userUid token exist the return is true or else false
     return !!localStorage.getItem('userToken');
   }
