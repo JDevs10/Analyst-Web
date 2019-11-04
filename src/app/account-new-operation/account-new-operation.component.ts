@@ -35,7 +35,18 @@ export class AccountNewOperationComponent implements OnInit {
       if (this.operationService.operationForm.get('$key').value == null) {
         this.operationService.getOperationAccountCurrency().then(function(snapshot) {
           // get the currency type from the account
-          let currency = snapshot.val().Currency;
+          const currency = snapshot.val().Currency;
+          let typeSymbol = operationFormX.get('Type').value;
+
+          console.log('typeSymbol 1: ' + typeSymbol);
+          if (typeSymbol == 'earnings') {
+            typeSymbol = '+';
+            console.log('typeSymbol 2: ' + typeSymbol);
+          }
+          if (typeSymbol == 'expenses') {
+            typeSymbol = '-';
+            console.log('typeSymbol 3: ' + typeSymbol);
+          }
 
           operationFormX.patchValue({
             Name: encrDecrServiceX.encrypt(operationFormX.get('Name').value),
@@ -44,6 +55,7 @@ export class AccountNewOperationComponent implements OnInit {
             Currency: currency,
             Date: encrDecrServiceX.encrypt(Date.now().toString()),
             Type: encrDecrServiceX.encrypt(operationFormX.get('Type').value),
+            TypeSymbol: encrDecrServiceX.encrypt(typeSymbol)
           });
           operationX.addOperation(operationFormX.value);
           operationFormX.reset();

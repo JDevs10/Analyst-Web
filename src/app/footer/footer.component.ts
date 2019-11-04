@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DateServiceService } from '../service/date-service.service';
 
 @Component({
   selector: 'app-footer',
@@ -7,16 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dateService: DateServiceService) { }
 
   ngOnInit() {
     const currentdate = new Date();
-    const datetime = currentdate.getDate() + '/'
-                    + (currentdate.getMonth() + 1)  + '/'
-                    + currentdate.getFullYear() + ' @ '
-                    + currentdate.getHours() + ':'
-                    + currentdate.getMinutes() + ':'
-                    + currentdate.getSeconds();
+    const datetime = this.dateService.getCurrentDateString(currentdate.getTime(), 'simpleDate');
     document.getElementById('footer-sync-info-time').innerText = datetime;
   }
 

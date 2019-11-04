@@ -8,11 +8,11 @@ export class EncrDecrService {
 
   constructor() { }
 
-  //The set method is use for encrypt the value.
-  set(keys, value){
-    var key = CryptoJS.enc.Utf8.parse(keys);
-    var iv = CryptoJS.enc.Utf8.parse(keys);
-    var encrypted = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(value.toString()), key,
+  // The set method is use for encrypt the value.
+  set(keys, value) {
+    const key = CryptoJS.enc.Utf8.parse(keys);
+    const iv = CryptoJS.enc.Utf8.parse(keys);
+    const encrypted = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(value.toString()), key,
     {
         keySize: 128 / 8,
         iv: iv,
@@ -23,11 +23,11 @@ export class EncrDecrService {
     return encrypted.toString();
   }
 
-  //The get method is use for decrypt the value.
-  get(keys, value){
-    var key = CryptoJS.enc.Utf8.parse(keys);
-    var iv = CryptoJS.enc.Utf8.parse(keys);
-    var decrypted = CryptoJS.AES.decrypt(value, key, {
+  // The get method is use for decrypt the value.
+  get(keys, value) {
+    const key = CryptoJS.enc.Utf8.parse(keys);
+    const iv = CryptoJS.enc.Utf8.parse(keys);
+    const decrypted = CryptoJS.AES.decrypt(value, key, {
         keySize: 128 / 8,
         iv: iv,
         mode: CryptoJS.mode.CBC,
@@ -37,13 +37,13 @@ export class EncrDecrService {
     return decrypted.toString(CryptoJS.enc.Utf8);
   }
 
-  encrypt(pwd: string){
-    var encrypted = this.set('123456$#@$^@1ERF', pwd);
+  encrypt(pwd: string) {
+    const encrypted = this.set('123456$#@$^@1ERF', pwd);
     return encrypted;
   }
 
-  decrypt(pwd: string){
-    var decrypted = this.get('123456$#@$^@1ERF', pwd);
+  decrypt(pwd: string) {
+    const decrypted = this.get('123456$#@$^@1ERF', pwd);
     return decrypted;
   }
 }

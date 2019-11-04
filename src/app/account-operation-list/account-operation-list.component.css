@@ -1,3 +1,23 @@
+.margin-row-0{
+  margin: 0;
+}
+
 nav#innerNavbar{
   background-color: #0B5ECD;
+}
+
+.card-box{
+  width: 400px;
+  height: auto;
+  overflow: hidden;
+  background-color: #EEEEEE;
+}
+
+.card-body-value{
+  position: absolute;
+  right: 5%;
+}
+
+div#operation-card-box{
+  display: none;
 }

@@ -23,7 +23,8 @@ export class OperationServiceService {
     Category: new FormControl('', Validators.required),
     Currency: new FormControl(''),
     Date: new FormControl(''),
-    Type: new FormControl('', Validators.required)
+    Type: new FormControl('', Validators.required),
+    TypeSymbol: new FormControl('')
   });
 
   getOperations() {
@@ -40,12 +41,13 @@ export class OperationServiceService {
   addOperation(operation) {
     const accountId = this.encrDecrService.decrypt(localStorage.getItem('accountID'));
     this.db.list(this.authenticationService.getCurrentUserUid() + '/accounts/' + accountId + '/Transactions').push({
-      Name: operation.Category,
+      Name: operation.Name,
       Value: operation.Value,
       Category: operation.Category,
       Currency: operation.Currency,
       Date: operation.Date,
-      Type: operation.Type
+      Type: operation.Type,
+      TypeSymbol: operation.TypeSymbol
     });
     console.log('addOperation() end');
   }
@@ -62,7 +64,8 @@ export class OperationServiceService {
         Category: operation.Category,
         Currency: operation.Currency,
         Date: operation.Date,
-        Type: operation.Type
+        Type: operation.Type,
+        TypeSymbol: operation.TypeSymbol
       });
     }
 
