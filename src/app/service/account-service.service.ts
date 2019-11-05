@@ -22,9 +22,14 @@ export class AccountServiceService {
     Color: new FormControl('', Validators.required)
   });
 
-  getAccount() {
+  getAccounts() {
     this.accountList = this.db.list(this.authenticationService.getCurrentUserUid() + '/accounts');
     return this.accountList.snapshotChanges();
+  }
+
+  getAccountById(accountID) {
+    const accountObject = this.db.list(this.authenticationService.getCurrentUserUid() + '/accounts/' + accountID);
+    return accountObject.snapshotChanges();
   }
 
   addAccount(account) {

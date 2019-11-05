@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AccountServiceService } from '../service/account-service.service';
 import { EncrDecrService } from '../service/encr-decr.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { OperationServiceService } from '../service/operation-service.service';
 
 @Component({
   selector: 'app-account-list',
@@ -12,6 +13,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class AccountListComponent implements OnInit {
 
   constructor(public accountService: AccountServiceService,
+              private operationService: OperationServiceService,
               public encrDecrService: EncrDecrService,
               private route: ActivatedRoute,
               private router: Router) { }
@@ -36,17 +38,20 @@ export class AccountListComponent implements OnInit {
     }
     document.getElementById('Sync').addEventListener('click', (b) => {
       this.getWindownScreenSize();
-      this.accountService.getAccount().subscribe(
-        List => {
-          this.accountArray = List.map(item => {
-            return{
-              $key: item.key,
-              ...item.payload.val()
-            };
+      this.accountService.getAccounts().subscribe(List => {
+        this.accountArray = List.map(item => {
+          const x = {
+            $key: item.key,
+            ...item.payload.val()
+          };
+
+          // Update every account value
+          this.updateAccountValue(item.key);
+          return x;
           });
-        });
-      this.notification('Reload Successfully !');
       });
+      this.notification('Reload Successfully !');
+    });
 
     if (this.encrDecrService.decrypt(localStorage.getItem('userEmail')) == 'analyst-test@gmail.com') {
         window.alert('Welcome to a test account!\nUser : analyst-test@gmail.com\nAny information stored on this ' +
@@ -57,16 +62,24 @@ export class AccountListComponent implements OnInit {
   // Add Sync to Sync current account and window size
   firstSyncReload() {
     this.getWindownScreenSize();
-    this.accountService.getAccount().subscribe(
-      List => {
-        this.accountArray = List.map(item => {
-          return{
-            $key: item.key,
-            ...item.payload.val()
-          };
-        });
+    this.accountService.getAccounts().subscribe(List => {
+      this.accountArray = List.map(item => {
+        const x = {
+          $key: item.key,
+          ...item.payload.val()
+        };
+
+        // Update every account value
+        this.updateAccountValue(item.key);
+        return x;
       });
-      this.notification('Reload Successfully !');
+    });
+    this.notification('Reload Successfully !');
+  }
+
+  // Update every account value
+  updateAccountValue(accountID) {
+    this.operationService.updateAccountValue(accountID);
   }
 
   // custom notifination

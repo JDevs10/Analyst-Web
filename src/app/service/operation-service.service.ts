@@ -4,6 +4,7 @@ import { AngularFireDatabase, AngularFireList} from 'angularfire2/database';
 import { AuthenticationService } from './authentication.service';
 import { EncrDecrService } from './encr-decr.service';
 import { timeout } from 'q';
+import { AccountServiceService } from './account-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +12,12 @@ import { timeout } from 'q';
 export class OperationServiceService {
 
   constructor(private db: AngularFireDatabase,
+              private accountService: AccountServiceService,
               private authenticationService: AuthenticationService,
               private encrDecrService: EncrDecrService) { }
-  currencyValue = 'a';
+
   operationList: AngularFireList<any>;
+  account = [];
 
   operationForm = new FormGroup({
     $key: new FormControl(null),
@@ -27,9 +30,38 @@ export class OperationServiceService {
     TypeSymbol: new FormControl('')
   });
 
+  syncOperations() {
+    // this.getWindownScreenSize();
+    this.getOperations().subscribe(List => {
+      return List.map(item => {
+        return{
+          $key: item.key,
+          ...item.payload.val()
+        };
+      });
+    });
+  }
+
+  getTotalAccountOperationValue(accountOperationArray) {
+    let totalValue = 0;
+    for (let operation of accountOperationArray) {
+      if (this.encrDecrService.decrypt(operation.TypeSymbol) == '+') {
+        totalValue += parseFloat(this.encrDecrService.decrypt(operation.Value));
+      } else if (this.encrDecrService.decrypt(operation.TypeSymbol) == '-') {
+        totalValue -= parseFloat(this.encrDecrService.decrypt(operation.Value));
+      }
+    }
+    return totalValue;
+  }
+
   getOperations() {
     const accountId = this.encrDecrService.decrypt(localStorage.getItem('accountID'));
     this.operationList = this.db.list(this.authenticationService.getCurrentUserUid() + '/accounts/' + accountId + '/Transactions');
+    return this.operationList.snapshotChanges();
+  }
+
+  getOperationsByAccountId(accountID) {
+    this.operationList = this.db.list(this.authenticationService.getCurrentUserUid() + '/accounts/' + accountID + '/Transactions');
     return this.operationList.snapshotChanges();
   }
 
@@ -49,7 +81,6 @@ export class OperationServiceService {
       Type: operation.Type,
       TypeSymbol: operation.TypeSymbol
     });
-    console.log('addOperation() end');
   }
 
   populateOperationEditForm(operation) {
@@ -71,5 +102,18 @@ export class OperationServiceService {
 
     deleteOperation($key: string) {
       this.operationList.remove($key);
+    }
+
+    updateAccountValue(accountID) {
+      this.getOperationsByAccountId(accountID).subscribe(List => {
+        let array = List.map(item => {
+          return{
+            $key: item.key,
+            ...item.payload.val()
+          };
+        });
+        const value = this.encrDecrService.encrypt('' + this.getTotalAccountOperationValue(array));
+        this.db.database.ref(this.authenticationService.getCurrentUserUid() + '/accounts/' + accountID).update({Value: value});
+      });
     }
 }

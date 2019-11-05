@@ -39,7 +39,7 @@ export class AccountNewOperationComponent implements OnInit {
           let typeSymbol = operationFormX.get('Type').value;
 
           console.log('typeSymbol 1: ' + typeSymbol);
-          if (typeSymbol == 'earnings') {
+          if (typeSymbol == 'income') {
             typeSymbol = '+';
             console.log('typeSymbol 2: ' + typeSymbol);
           }

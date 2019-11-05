@@ -126,7 +126,7 @@
             <div class="col-lg-10 col-md-4 col-sm-6" (click)="viewTheAccount(account)">
             <div class="card mb-2 shadow-sm card-box" [ngStyle]="{'background-color': this.encrDecrService.decrypt(account.Color), 'overflow': hidden}">
               <div class="card-body">
-                <h2>{{this.encrDecrService.decrypt(account.Currency)}} {{this.encrDecrService.decrypt(account.Value)}}</h2>
+                <h2>{{this.encrDecrService.decrypt(account.Value)}}{{this.encrDecrService.decrypt(account.Currency)}}</h2>
                 <h5>{{this.encrDecrService.decrypt(account.Name)}}</h5>
                 <p>{{this.encrDecrService.decrypt(account.Category)}}</p>
                 <div class="account-icon">

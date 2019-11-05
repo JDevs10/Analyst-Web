@@ -34,6 +34,7 @@ export class AccountOperationListComponent implements OnInit {
               ...item.payload.val()
             };
           });
+          this.getAccountTotalValue(this.accountOperationArray);
         });
       this.notification('Reload Successfully !');
       });
@@ -42,16 +43,23 @@ export class AccountOperationListComponent implements OnInit {
   // Add Sync to Sync current account and window size
   firstSyncReload() {
     // this.getWindownScreenSize();
-    this.operationService.getOperations().subscribe(
-      List => {
-        this.accountOperationArray = List.map(item => {
-          return{
-            $key: item.key,
-            ...item.payload.val()
-          };
-        });
+    this.operationService.getOperations().subscribe(List => {
+      this.accountOperationArray = List.map(item => {
+        return{
+          $key: item.key,
+          ...item.payload.val()
+        };
       });
+      this.getAccountTotalValue(this.accountOperationArray);
+    });
     this.notification('Reload Successfully !');
+  }
+
+  // Get, Calculat && Show the total value amount of the account
+  getAccountTotalValue(array) {
+    const value = this.operationService.getTotalAccountOperationValue(array);
+    const element = document.getElementById('Total-Account-Operation-Value');
+    element.innerHTML = 'Total: ' + value;
   }
 
   // custom notifination

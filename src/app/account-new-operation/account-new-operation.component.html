@@ -45,7 +45,7 @@
         <label for="">Transaction Type : </label> &nbsp;
         <select class="form-group" formControlName="Type" [ngClass]="{'is-invalid':submitted && formControls.Type.errors}">
           <option value="">Please select</option>
-          <option value="earnings">Earnings</option>
+          <option value="income">Income</option>
           <option value="expenses">Expenses</option>
         </select>
         <div class="invalid-feeback text-danger" *ngIf="submitted && formControls.Type.errors">
