@@ -45,7 +45,7 @@ import { AccountNewOperationComponent } from './account-new-operation/account-ne
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     FormsModule,
-    ChartsModule
+    ChartsModule,
   ],
   providers: [
     AccountServiceService,
