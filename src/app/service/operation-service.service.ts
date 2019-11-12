@@ -116,4 +116,9 @@ export class OperationServiceService {
         this.db.database.ref(this.authenticationService.getCurrentUserUid() + '/accounts/' + accountID).update({Value: value});
       });
     }
+
+    getAllCategories() {
+      const accountId = this.encrDecrService.decrypt(localStorage.getItem('accountID'));
+      return this.db.list(this.authenticationService.getCurrentUserUid() + '/accounts/' + accountId + '/Categories/Operations');
+    }
 }

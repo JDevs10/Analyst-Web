@@ -18,10 +18,20 @@ export class AccountNewOperationComponent implements OnInit {
 
   submitted: boolean;
   firstSync = true;
+  categoryArray = [];
   formControls = this.operationService.operationForm.controls;
 
   ngOnInit() {
-
+    this.newCategoryVisibility();
+    this.operationService.getAllCategories().snapshotChanges().subscribe(List => {
+      this.categoryArray = List.map(item => {
+        return {
+          $key: item.key,
+          ...item.payload.val()
+        };
+      });
+      this.loadSelecteCategories( this.categoryArray);
+    });
   }
 
   addNewOperationSubmit() {
@@ -32,8 +42,31 @@ export class AccountNewOperationComponent implements OnInit {
 
     this.submitted = true;
     if (this.operationService.operationForm.valid) {
+      const operationCategories = this.categoryArray;
       if (this.operationService.operationForm.get('$key').value == null) {
+        console.log('categories: ' + operationCategories.length);
+
         this.operationService.getOperationAccountCurrency().then(function(snapshot) {
+
+          // get new category from user
+          const inputNewCat = document.getElementById('newCategoryID');
+          const selectCat = document.getElementById('selectCategoryID');
+          let categoryValue;
+
+          if (selectCat.options[selectCat.selectedIndex].value == 'New') {
+            for (let x = 0; x < operationCategories.length; x++) {
+              if (operationCategories[x].Name == inputNewCat.value) {
+                alert('Category "' + operationCategories[x].Name + '" exist already!');
+                return;
+              }
+            }
+            categoryValue = inputNewCat.value;
+          } else {
+            categoryValue = operationFormX.get('Category').value;
+          }
+
+          console.log('End Cat Value: ' + categoryValue);
+
           // get the currency type from the account
           const currency = snapshot.val().Currency;
           let typeSymbol = operationFormX.get('Type').value;
@@ -51,7 +84,7 @@ export class AccountNewOperationComponent implements OnInit {
           operationFormX.patchValue({
             Name: encrDecrServiceX.encrypt(operationFormX.get('Name').value),
             Value: encrDecrServiceX.encrypt(operationFormX.get('Value').value),
-            Category: encrDecrServiceX.encrypt(operationFormX.get('Category').value),
+            Category: encrDecrServiceX.encrypt(categoryValue),
             Currency: currency,
             Date: encrDecrServiceX.encrypt(Date.now().toString()),
             Type: encrDecrServiceX.encrypt(operationFormX.get('Type').value),
@@ -75,5 +108,32 @@ export class AccountNewOperationComponent implements OnInit {
   cancelNewOperationSubmit() {
     const accountId = this.encrDecrService.decrypt(localStorage.getItem('accountID'));
     this.router.navigate(['/accounts/' + accountId + '/operations'], {relativeTo: this.route});
+  }
+
+  loadSelecteCategories(categoryArray) {
+    const selectCat = document.getElementById('selectCategoryID');
+
+    for (let x=0; x < categoryArray.length; x++) {
+      // get reference to select element
+      const option = document.createElement('option');
+      option.appendChild( document.createTextNode('' + categoryArray[x].Name) );
+      option.value = categoryArray[x].Name;
+      selectCat.appendChild(option);
+    }
+    const optionE = document.createElement('option');
+    optionE.appendChild( document.createTextNode('New') );
+    optionE.value = 'New';
+    selectCat.appendChild(optionE);
+  }
+
+  newCategoryVisibility() {
+    const inputNewCat = document.getElementById('newCategoryID');
+    const selectCat = document.getElementById('selectCategoryID');
+
+    if (selectCat.options[selectCat.selectedIndex].value == 'New') {
+      inputNewCat.style.display = 'block';
+    } else {
+      inputNewCat.style.display = 'none';
+    }
   }
 }

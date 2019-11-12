@@ -13,3 +13,9 @@ div#new-account-operation-layout{
 input{
   background-color: rgb(185, 185, 185);
 }
+
+input#newCategoryID{
+  width: 25%;
+  margin: 0 5% 0 5%;
+  visibility: visible;
+}
