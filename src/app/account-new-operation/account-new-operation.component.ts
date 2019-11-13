@@ -49,8 +49,8 @@ export class AccountNewOperationComponent implements OnInit {
         this.operationService.getOperationAccountCurrency().then(function(snapshot) {
 
           // get new category from user
-          const inputNewCat = document.getElementById('newCategoryID');
-          const selectCat = document.getElementById('selectCategoryID');
+          const inputNewCat = document.getElementById('newCategoryID') as HTMLInputElement;
+          const selectCat = document.getElementById('selectCategoryID') as HTMLSelectElement;
           let categoryValue;
 
           if (selectCat.options[selectCat.selectedIndex].value == 'New') {
@@ -111,7 +111,7 @@ export class AccountNewOperationComponent implements OnInit {
   }
 
   loadSelecteCategories(categoryArray) {
-    const selectCat = document.getElementById('selectCategoryID');
+    const selectCat = document.getElementById('selectCategoryID') as HTMLSelectElement;
 
     for (let x=0; x < categoryArray.length; x++) {
       // get reference to select element
@@ -127,8 +127,8 @@ export class AccountNewOperationComponent implements OnInit {
   }
 
   newCategoryVisibility() {
-    const inputNewCat = document.getElementById('newCategoryID');
-    const selectCat = document.getElementById('selectCategoryID');
+    const inputNewCat = document.getElementById('newCategoryID') as HTMLInputElement;
+    const selectCat = document.getElementById('selectCategoryID') as HTMLSelectElement;
 
     if (selectCat.options[selectCat.selectedIndex].value == 'New') {
       inputNewCat.style.display = 'block';

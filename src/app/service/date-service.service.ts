@@ -25,6 +25,12 @@ export class DateServiceService {
     }
   }
 
+  getCurrentDateYear(timeStamp) {
+    const d = new Date();
+    d.setTime(timeStamp);
+    return d.getFullYear();
+  }
+
   getCurrentDate() {
     return new Date();
   }
