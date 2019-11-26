@@ -1,0 +1,41 @@
+<div id="new-account-operation-category" class="row">
+  <div id="new-account-operation-category-layout">
+    <div class="header">
+      <div class="row margin-row-0">
+        <div>
+          <h2 class="title">Add New Operation Category</h2>
+        </div>
+      </div>
+    </div>
+
+    <form [formGroup]="this.operationCategoryService.operationCategoryForm" >
+    <div class="body">
+      <input type="hidden" formControlName="$key">
+      <div class="form-group">
+        <label for="">Name : </label>
+        <input class="form-control" size="10" formControlName="Name" [ngClass]="{'is-invalid':submitted && formControls.Name.errors}">
+        <div class="invalid-feeback text-danger" *ngIf="submitted && formControls.Name.errors">
+          This field is required.
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row margin-row-0">
+      <div class="btn">
+        <button (click)="addNewOperationCategorySubmit();" type="submit" class="btn btn-primary mr-3"><i class="far fa-save"></i></button>
+        <button (click)="cancelNewOperationCategorySubmit();" type="submit" class="btn btn-primary">Cancel</button>
+      </div>
+    </div>
+
+    </form>
+  </div>
+  <div class="p-5">
+    <h3>Liste des categories</h3>
+    <br>
+    <div *ngFor="let category of operationCategoryArray">
+      <p>{{category.Name}}</p>
+    </div>
+  </div>
+</div>

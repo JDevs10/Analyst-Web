@@ -24,6 +24,7 @@ import { ChartsModule } from 'ng2-charts';
 import { AccountOperationListComponent } from './account-operation-list/account-operation-list.component';
 import { AccountComponent } from './account/account.component';
 import { AccountNewOperationComponent } from './account-new-operation/account-new-operation.component';
+import { AccountNewOperationCategoryComponent } from './account-new-operation-category/account-new-operation-category.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { AccountNewOperationComponent } from './account-new-operation/account-ne
     AccountGraphListComponent,
     AccountOperationListComponent,
     AccountComponent,
-    AccountNewOperationComponent
+    AccountNewOperationComponent,
+    AccountNewOperationCategoryComponent
   ],
   imports: [
     BrowserModule,

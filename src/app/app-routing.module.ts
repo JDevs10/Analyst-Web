@@ -8,6 +8,7 @@ import { AccountListComponent } from '../app/account-list/account-list.component
 import { AccountComponent } from './account/account.component';
 import { AccountOperationListComponent } from './account-operation-list/account-operation-list.component';
 import { AccountNewOperationComponent } from './account-new-operation/account-new-operation.component';
+import { AccountNewOperationCategoryComponent } from './account-new-operation-category/account-new-operation-category.component';
 import { AccountGraphListComponent } from './account-graph-List/account-graph-List.component';
 import { AuthGuard } from './auth.guard';
 
@@ -25,6 +26,7 @@ const routes: Routes = [
     children: [
       { path: 'operations', component: AccountOperationListComponent, canActivate: [AuthGuard] },
       { path: 'new-operation', component: AccountNewOperationComponent, canActivate: [AuthGuard] },
+      { path: 'new-operation-category', component: AccountNewOperationCategoryComponent, canActivate: [AuthGuard] },
       { path: 'graph', component: AccountGraphListComponent, canActivate: [AuthGuard] }
     ]
   }

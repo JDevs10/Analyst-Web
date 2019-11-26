@@ -40,6 +40,10 @@ export class AccountComponent implements OnInit {
     this.router.navigate(['/accounts/' + accountId + '/new-operation'], {relativeTo: this.route});
   }
 
+  showAccountNewOperationCategory(accountId){
+    this.router.navigate(['/accounts/' + accountId + '/new-operation-category'], {relativeTo: this.route});
+  }
+
   showAccountGraphOperationList(accountId) {
     this.router.navigate(['/accounts/' + accountId + '/graph'], {relativeTo: this.route});
   }
