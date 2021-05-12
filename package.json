@@ -21,7 +21,7 @@
     "@angular/router": "~7.2.0",
     "@types/jquery": "^3.3.31",
     "angularfire2": "^5.2.1",
-    "chart.js": "^2.9.2",
+    "chart.js": "^2.9.4",
     "core-js": "^2.5.4",
     "crypto-js": "^3.1.9-1",
     "firebase": "^7.2.3",
